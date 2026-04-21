@@ -1,0 +1,89 @@
+/* Xóa khoảng cách mặc định của trình duyệt */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Đổi nền website thành màu đen xám, chữ màu trắng */
+body {
+    background-color: #141414;
+    color: white;
+}
+
+/* --- LÀM ĐẸP PHẦN HEADER (MENU) --- */
+header {
+    display: flex;
+    justify-content: space-between; /* Đẩy Logo và Menu ra 2 bên */
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #000000; /* Nền đen đậm cho menu */
+}
+
+header h1 {
+    color: #e50914; /* Màu đỏ giống Netflix */
+    font-size: 28px;
+}
+
+nav ul {
+    list-style: none; /* Bỏ dấu chấm tròn của danh sách */
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa các mục menu */
+}
+
+nav a {
+    color: white;
+    text-decoration: none; /* Bỏ gạch chân của link */
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #e50914; /* Di chuột vào chữ sẽ đổi sang màu đỏ */
+}
+
+/* --- LÀM ĐẸP DANH SÁCH PHIM (LƯỚI PHIM) --- */
+main {
+    padding: 40px 50px;
+}
+
+main h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-left: 5px solid #e50914;
+    padding-left: 10px;
+}
+
+/* Tạo lưới để xếp các phim nằm ngang nhau */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* Khoảng cách giữa các phim */
+}
+
+/* Định dạng từng ô phim (tạm thời dạng hình chữ nhật xám) */
+.movie-card {
+    background-color: #333;
+    height: 300px;
+    border-radius: 8px; /* Bo góc nhẹ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s; /* Hiệu ứng mượt khi di chuột */
+}
+
+.movie-card:hover {
+    transform: scale(1.05); /* Di chuột vào sẽ phóng to lên một chút */
+    background-color: #555;
+}
+
+/* --- LÀM ĐẸP CHÂN TRANG --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    margin-top: 50px;
+}

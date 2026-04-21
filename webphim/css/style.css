@@ -1,0 +1,179 @@
+/* Xóa khoảng cách mặc định của trình duyệt */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Đổi nền website thành màu đen xám, chữ màu trắng */
+body {
+    background-color: #141414;
+    color: white;
+}
+	
+/* --- LÀM ĐẸP PHẦN HEADER (MENU) --- */
+header {
+    display: flex;
+    justify-content: space-between; /* Đẩy Logo và Menu ra 2 bên */
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #000000; /* Nền đen đậm cho menu */
+}
+
+.logo {
+    height: 50px; /* Chỉnh chiều cao logo cho vừa với thanh menu */
+    width: auto; /* Chiều ngang tự động thu lại theo tỷ lệ */
+    cursor: pointer; /* Biến con trỏ thành hình bàn tay khi di chuột vào */
+}
+
+nav ul {
+    list-style: none; /* Bỏ dấu chấm tròn của danh sách */
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa các mục menu */
+}
+
+nav a {
+    color: white;
+    text-decoration: none; /* Bỏ gạch chân của link */
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #e50914; /* Di chuột vào chữ sẽ đổi sang màu đỏ */
+}
+
+/* --- LÀM ĐẸP DANH SÁCH PHIM (LƯỚI PHIM) --- */
+main {
+    padding: 40px 50px;
+}
+
+main h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-left: 5px solid #e50914;
+    padding-left: 10px;
+}
+
+/* Tạo lưới để xếp các phim nằm ngang nhau */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* Khoảng cách giữa các phim */
+}
+
+/* Khung chứa bao bọc cả ảnh và chữ */
+.movie-card {
+    background-color: #222; /* Màu nền cho phần chứa chữ (tối hơn một chút cho sang) */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Lệnh siêu quan trọng: Bắt buộc ảnh ở trên, chữ ở dưới */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s; /* Thời gian chuyển động khi zoom */
+}
+
+/* Hiệu ứng phóng to khi đưa chuột vào phim */
+.movie-card:hover {
+    transform: scale(1.05);
+    background-color: #333; /* Sáng nền lên một chút khi di chuột */
+}
+
+/* Định dạng riêng cho bức ảnh */
+.movie-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3; /* Giữ ảnh luôn ở tỷ lệ dọc chuẩn Poster */
+    object-fit: cover;
+}
+
+/* Định dạng cho tên phim */
+.movie-title {
+    color: white;
+    font-size: 16px;
+    text-align: center; /* Căn giữa chữ */
+    padding: 15px 10px; /* Khoảng trống để chữ không bị dính vào mép ảnh */
+    margin: 0;
+    white-space: nowrap; /* Ngăn không cho chữ rớt dòng nếu tên phim quá dài */
+    overflow: hidden; /* Giấu phần chữ bị tràn */
+    text-overflow: ellipsis; /* Tự động thêm dấu "..." nếu tên phim dài quá khung */
+}
+/* --- LÀM ĐẸP CHÂN TRANG (FOOTER) --- */
+footer {
+    text-align: center; /* Lệnh quan trọng nhất: Căn giữa chữ */
+    padding: 20px; /* Tạo khoảng trống xung quanh chữ cho thoáng */
+    background-color: #000000; /* Nền màu đen để tách biệt với phần trên */
+    margin-top: 50px; /* Đẩy chân trang cách xa danh sách phim ra một chút */
+}
+
+footer p {
+    margin: 0;
+    color: #aaaaaa; /* Đổi màu chữ thành xám nhạt  */
+    font-size: 14px;
+}
+/* --- BANNER CHÍNH (HERO) --- */
+.hero {
+    /* Lệnh làm mờ dần phông nền từ trái sang phải để chữ dễ đọc hơn, kết hợp gọi ảnh banner.png ra */
+    background-image: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%), url('../images/banner.png');
+    background-size: cover
+    background-position: center;
+    height: 500px; /* Chiều cao của banner */
+    display: flex;
+    align-items: center; /* Căn giữa nội dung chữ theo chiều dọc */
+    padding: 0 50px;
+    margin-bottom: 40px; /* Đẩy danh sách phim ở dưới cách xa ra một chút */
+}
+
+.hero-content {
+    max-width: 600px; /* Giới hạn độ dài của đoạn chữ để không bị tràn hết màn hình */
+}
+
+.hero-content h2 {
+    font-size: 50px;
+    color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Đổ bóng cho chữ nổi bần bật */
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #ddd;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* --- NÚT BẤM TRONG BANNER --- */
+.btn-watch, .btn-info {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: transform 0.2s, background-color 0.2s; /* Hiệu ứng chuyển động mượt mà */
+}
+
+/* Nút XEM NGAY màu đỏ */
+.btn-watch {
+    background-color: #e50914; 
+    color: white;
+}
+
+.btn-watch:hover {
+    background-color: #f40612; /* Sáng lên khi đưa chuột vào */
+    transform: scale(1.05); /* Phóng to nhẹ */
+}
+
+/* Nút THÔNG TIN màu xám trong suốt */
+.btn-info {
+    background-color: rgba(109, 109, 110, 0.7); 
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: rgba(109, 109, 110, 0.9);
+    transform: scale(1.05);
+}
