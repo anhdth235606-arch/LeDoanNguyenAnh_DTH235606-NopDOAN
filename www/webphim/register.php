@@ -1,0 +1,139 @@
+<?php
+// Gọi file kết nối database
+require_once 'ket_noi.php';
+
+// Biến lưu thông báo để hiển thị cho người dùng
+$thong_bao = "";
+
+// Kiểm tra xem người dùng đã bấm nút Đăng ký (gửi form bằng phương thức POST) chưa
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $ho_ten = $_POST['fullname'];
+    $email = $_POST['email'];
+    $ten_dang_nhap = $_POST['username'];
+    $mat_khau_nhap_vao = $_POST['password'];
+    $xac_nhan_mat_khau = $_POST['confirm_password'];
+
+    // Kiểm tra mật khẩu xác nhận có khớp không
+    if ($mat_khau_nhap_vao != $xac_nhan_mat_khau) {
+        $thong_bao = "Mật khẩu xác nhận không khớp!";
+    } else {
+        // Mã hóa mật khẩu để bảo mật
+        $mat_khau_ma_hoa = password_hash($mat_khau_nhap_vao, PASSWORD_DEFAULT);
+
+        // Lệnh SQL để thêm dữ liệu vào bảng nguoi_dung
+        $sql = "INSERT INTO nguoi_dung (ho_ten, email, ten_dang_nhap, mat_khau) 
+                VALUES ('$ho_ten', '$email', '$ten_dang_nhap', '$mat_khau_ma_hoa')";
+
+        if (mysqli_query($conn, $sql)) {
+            $thong_bao = "Đăng ký thành công! Bạn có thể đăng nhập ngay.";
+        } else {
+            $thong_bao = "Lỗi: Tài khoản hoặc Email đã tồn tại!";
+        }
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký thành viên - Web Phim</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* Sử dụng lại phong cách của trang login để đồng bộ */
+        body {
+            background-color: #000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-container {
+            background-color: #141414;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #e50914;
+            color: white;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .btn-submit:hover {
+            background-color: #f40612;
+        }
+
+        .login-text {
+            margin-top: 20px;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .login-link {
+            color: #e50914;
+            text-decoration: underline; /* Gạch chân */
+            font-weight: bold;
+        }
+        
+        .back-home {
+            display: inline-block;
+            margin-top: 20px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2 style="margin-bottom: 25px;">Đăng Ký Tài Khoản</h2>
+        <p style="color: yellow; font-weight: bold;"><?php echo $thong_bao; ?></p>
+        
+        <form action="" method="POST">
+            <input type="text" name="fullname" placeholder="Họ và tên" class="input-field" required>
+            <input type="email" name="email" placeholder="Email" class="input-field" required>
+            <input type="text" name="username" placeholder="Tên đăng nhập" class="input-field" required>
+            <input type="password" name="password" placeholder="Mật khẩu" class="input-field" required>
+            <input type="password" name="confirm_password" placeholder="Xác nhận mật khẩu" class="input-field" required>
+            
+            <button type="submit" class="btn-submit">Đăng ký tài khoản</button>
+        </form>
+
+        <p class="login-text">
+            Đã có tài khoản? <a href="login.php" class="login-link">Đăng nhập tại đây</a>
+        </p>
+
+        <a href="index.php" class="back-home">&larr; Quay lại Trang chủ</a>
+    </div>
+
+</body>
+</html>
