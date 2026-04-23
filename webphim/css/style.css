@@ -66,38 +66,43 @@ main h2 {
 
 /* Khung chứa bao bọc cả ảnh và chữ */
 .movie-card {
-    background-color: #222; /* Màu nền cho phần chứa chữ (tối hơn một chút cho sang) */
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column; /* Lệnh siêu quan trọng: Bắt buộc ảnh ở trên, chữ ở dưới */
+    position: relative;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s; /* Thời gian chuyển động khi zoom */
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    transition: transform 0.3s;
+    /* Đặt chiều cao cố định cho card nếu muốn đồng đều */
+    display: flex;
+    flex-direction: column;
 }
+
 
 /* Hiệu ứng phóng to khi đưa chuột vào phim */
 .movie-card:hover {
-    transform: scale(1.05);
-    background-color: #333; /* Sáng nền lên một chút khi di chuột */
+    transform: scale(1.02);
+}
+.movie-card:hover img {
+    transform: scale(1.05);   /* Hiệu ứng phóng to nhẹ khi hover */
 }
 
 /* Định dạng riêng cho bức ảnh */
 .movie-card img {
     width: 100%;
-    aspect-ratio: 2 / 3; /* Giữ ảnh luôn ở tỷ lệ dọc chuẩn Poster */
-    object-fit: cover;
+    height: 360px;            /* Chiều cao cố định, có thể tùy chỉnh */
+    object-fit: cover;        /* Cắt ảnh để lấp đầy khung, giữ tỉ lệ gốc */
+    display: block;
+    transition: transform 0.3s ease;
 }
 
 /* Định dạng cho tên phim */
 .movie-title {
-    color: white;
-    font-size: 16px;
-    text-align: center; /* Căn giữa chữ */
-    padding: 15px 10px; /* Khoảng trống để chữ không bị dính vào mép ảnh */
+    padding: 12px 8px;
     margin: 0;
-    white-space: nowrap; /* Ngăn không cho chữ rớt dòng nếu tên phim quá dài */
-    overflow: hidden; /* Giấu phần chữ bị tràn */
-    text-overflow: ellipsis; /* Tự động thêm dấu "..." nếu tên phim dài quá khung */
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-color: #1f1f1f;
 }
 /* --- LÀM ĐẸP CHÂN TRANG (FOOTER) --- */
 footer {
@@ -112,18 +117,7 @@ footer p {
     color: #aaaaaa; /* Đổi màu chữ thành xám nhạt  */
     font-size: 14px;
 }
-/* --- BANNER CHÍNH (HERO) --- */
-.hero {
-    /* Lệnh làm mờ dần phông nền từ trái sang phải để chữ dễ đọc hơn, kết hợp gọi ảnh banner.png ra */
-    background-image: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%), url('../images/banner.png');
-    background-size: cover
-    background-position: center;
-    height: 500px; /* Chiều cao của banner */
-    display: flex;
-    align-items: center; /* Căn giữa nội dung chữ theo chiều dọc */
-    padding: 0 50px;
-    margin-bottom: 40px; /* Đẩy danh sách phim ở dưới cách xa ra một chút */
-}
+
 
 .hero-content {
     max-width: 600px; /* Giới hạn độ dài của đoạn chữ để không bị tràn hết màn hình */
@@ -176,4 +170,155 @@ footer p {
 .btn-info:hover {
     background-color: rgba(109, 109, 110, 0.9);
     transform: scale(1.05);
+}
+/* Bảng xếp hạng phim mới nhất */
+.ranking-section {
+    margin: 20px 5% 40px;
+    background: #111;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+.ranking-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
+}
+.ranking-header i {
+    font-size: 28px;
+}
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #1a1a1a;
+    padding: 10px 15px;
+    border-radius: 12px;
+    transition: 0.2s;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #2a2a2a;
+}
+.ranking-item:hover {
+    background: #2a2a2a;
+    border-color: #e50914;
+    transform: translateX(5px);
+}
+.rank-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e50914;
+    min-width: 30px;
+    text-align: center;
+}
+.rank-thumb {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.rank-info {
+    flex: 1;
+}
+.rank-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.rank-year {
+    font-size: 13px;
+    color: #aaa;
+}
+.rank-badge {
+    background: #e50914;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+/* Bảng xếp hạng */
+.ranking-section {
+    margin: 20px 5% 40px;
+    background: #111;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+.ranking-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
+}
+.ranking-header i {
+    font-size: 28px;
+}
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ranking-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #1a1a1a;
+    padding: 10px 15px;
+    border-radius: 12px;
+    transition: 0.2s;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #2a2a2a;
+}
+.ranking-item:hover {
+    background: #2a2a2a;
+    border-color: #e50914;
+    transform: translateX(5px);
+}
+.rank-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #e50914;
+    min-width: 30px;
+    text-align: center;
+}
+.rank-thumb {
+    width: 50px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.rank-info {
+    flex: 1;
+}
+.rank-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.rank-year {
+    font-size: 13px;
+    color: #aaa;
+}
+.rank-views {
+    font-size: 14px;
+    color: #e50914;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+.rank-views i {
+    font-size: 12px;
 }
